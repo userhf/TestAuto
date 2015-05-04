@@ -1,16 +1,41 @@
-# TestAuto
 #include <Servo.h>
 
   Servo left;
   Servo right;
 
 void setup() { 
-  left.attach(13);
-  right.attach(14);
+  pinMode(13, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  
+  left.attach(8);
+  right.attach(9);
   left.write(90);
   right.write(90);
   
-  delay(3000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  digitalWrite(13, HIGH);
 }
 
 void loop() {
