@@ -1,48 +1,70 @@
-#include <Servo.h>
+void setup() {
+  pinMode(12, OUTPUT);
+  pinMode(9, OUTPUT);
 
-  Servo left;
-  Servo right;
-
-void setup() { 
   pinMode(13, OUTPUT);
   pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
+
+  pinMode(10, OUTPUT);
   
-  left.attach(8);
-  right.attach(9);
-  left.write(90);
-  right.write(90);
+  delay(1000);
   
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
-  digitalWrite(13, HIGH);
+  for(int ctr; ctr <= 10; ctr++){
+    digitalWrite(10, HIGH);
+    delay(500);
+    digitalWrite(10, LOW);
+    delay(1000);
+  }
+  
+  digitalWrite(10, HIGH);
 }
 
-void loop() {
-  left.write(120);
-  right.write(120);
+void lforward(){
+  digitalWrite(12, HIGH);
+  digitalWrite(9, LOW);
+  analogWrite(3, 123);
+}
+
+void rforward(){
+  digitalWrite(13, HIGH);
+  digitalWrite(8, LOW);
+  analogWrite(11, 123);
+}
+
+void lback(){
+  digitalWrite(12, LOW);
+  digitalWrite(9, LOW);
+  analogWrite(3, 123);
+}
+
+void rback(){
+  digitalWrite(13, LOW);
+  digitalWrite(8, LOW);
+  analogWrite(11, 123);
+}
+
+void lstop(){
+  digitalWrite(9, LOW);
+}
+
+void rstop(){
+  digitalWrite(8, LOW);
+}
+
+void loop(){
+  lforward();
+  rforward();
   delay(1000);
-  left.write(60);
-  right.write(60);
+  
+  lstop();
+  rstop();
+  delay(1000);
+  
+  lback();
+  rback();
+  delay(1000);
+  
+  lstop();
+  rstop();
   delay(1000);
 }
