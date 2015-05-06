@@ -9,25 +9,6 @@ void setup() {
   pinMode(6, OUTPUT);
   
   delay(1000);
-  
-  digitalWrite(7, HIGH);
-  digitalWrite(6, HIGH);
-  delay(1000);
-  digitalWrite(7, LOW);
-  digitalWrite(6, LOW);
-  delay(1000);
-  digitalWrite(7, HIGH);
-  digitalWrite(6, HIGH);
-  delay(1000);
-  digitalWrite(7, LOW);
-  digitalWrite(6, LOW);
-  delay(1000);
-  digitalWrite(7, HIGH);
-  digitalWrite(6, HIGH);
-  delay(1000);
-  digitalWrite(7, LOW);
-  digitalWrite(6, LOW);
-  delay(1000);
   digitalWrite(7, HIGH);
   digitalWrite(6, HIGH);
   delay(1000);
@@ -43,37 +24,30 @@ void setup() {
 }
 
 void loop(){
-  lforward();
-  rforward();
-  delay(1000);
+  int ctr = 0;
+  int far = 0;
+  far = howFar();
   
-  lstop();
-  rstop();
-  delay(1000);
+  if (far < 30){
+    if (ctr < 5){
+      lforward();
+      rback();
+      delay(1000);
+    }
+    
+    lstop();
+    rstop();
+    ctr++
+  }
   
-  lback();
-  rback();
-  delay(1000);
-  
-  lstop();
-  rstop();
-  delay(1000);
-  
-  lforward();
-  rback();
-  delay(1000);
-  
-  lstop();
-  rstop();
-  delay(1000);
-  
-  lback();
-  rforward();
-  delay(1000);
-  
-  lstop();
-  rstop();
-  delay(5000);
+  else{
+    lforward();
+    rforward();
+    delay(1000);
+    
+    lstop();
+    rstop();
+  }
 }
 
 void lforward(){
@@ -114,4 +88,28 @@ void rstop(){
   digitalWrite(8, HIGH);
   digitalWrite(6, LOW);
   digitalWrite(7, LOW);
+}
+
+int howFar(){
+  int trigpin = 5;
+  int echopin = 4;
+  
+  pinMode(trigpin, OUTPUT);
+  pinMode(echopin, INPUT);
+  
+  int cm = 0;
+  int duration = 0;
+  
+  digitalWrite(trigpin, LOW);
+  delayMicroseconds(2);
+  
+  digitalWrite(trigpin, HIGH);
+  delayMicroseconds(10);
+  
+  digitalWrite(trigpin, LOW);
+  duration = pulseIn(echopin, HIGH);
+  
+  cm = duration / 58.2;
+  
+  return cm;
 }
