@@ -28,54 +28,83 @@ void loop(){
   int far = 0;
   far = howFar();
   
-  if (far < 30){
-    if (ctr < 5){
-      lforward();
-      rback();
-      delay(1000);
-    }
+  Serial.println(far);
+  
+  if (far < 2){
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
     
     lstop();
     rstop();
-    ctr++
+    delay(9000);
+    
+    digitalWrite(6, LOW);
+    digitalWrite(7, HIGH);
+    delay(250);
+    
+    digitalWrite(6, HIGH);
+    digitalWrite(7, LOW);
+    delay(250);
+    
+    digitalWrite(6, HIGH);
+    digitalWrite(7, LOW);
+    delay(250);
+    
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    delay(250);
+    
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
   }
   
-  else{
+  else if (far > 30){
     lforward();
     rforward();
     delay(1000);
     
     lstop();
     rstop();
+    delay(1000);
+  }
+  
+  else {
+    lback();
+    rback();
+    delay(1000);
+    
+    lstop();
+    rstop();
+    delay(1000);
   }
 }
 
-void lforward(){
-  digitalWrite(12, HIGH);
-  digitalWrite(9, LOW);
-  analogWrite(3, 123);
-  digitalWrite(6, HIGH);
-}
-
-void rforward(){
-  digitalWrite(13, HIGH);
-  digitalWrite(8, LOW);
-  analogWrite(11, 123);
-  digitalWrite(6, HIGH);
-}
-
 void lback(){
-  digitalWrite(12, LOW);
+  digitalWrite(12, HIGH);
   digitalWrite(9, LOW);
   analogWrite(3, 123);
   digitalWrite(7, HIGH);
 }
 
 void rback(){
-  digitalWrite(13, LOW);
+  digitalWrite(13, HIGH);
   digitalWrite(8, LOW);
   analogWrite(11, 123);
   digitalWrite(7, HIGH);
+}
+
+void lforward(){
+  digitalWrite(12, LOW);
+  digitalWrite(9, LOW);
+  analogWrite(3, 123);
+  digitalWrite(6, HIGH);
+}
+
+void rforward(){
+  digitalWrite(13, LOW);
+  digitalWrite(8, LOW);
+  analogWrite(11, 123);
+  digitalWrite(6, HIGH);
 }
 
 void lstop(){
