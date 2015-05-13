@@ -36,29 +36,38 @@ void loop(){
     
     lstop();
     rstop();
-    delay(9000);
+    delay(4000);
+    
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    
+    delay(1000);
     
     digitalWrite(6, LOW);
-    digitalWrite(7, HIGH);
-    delay(250);
-    
-    digitalWrite(6, HIGH);
     digitalWrite(7, LOW);
-    delay(250);
     
-    digitalWrite(6, HIGH);
-    digitalWrite(7, LOW);
-    delay(250);
+    delay(1000);
     
     digitalWrite(6, HIGH);
     digitalWrite(7, HIGH);
-    delay(250);
+    
+    delay(1000);
+    
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW); 
+    
+    delay(1000);
+    
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    
+    delay(1000);
     
     digitalWrite(6, LOW);
     digitalWrite(7, LOW);
   }
   
-  else if (far > 30){
+  else if (far > 15){
     lforward();
     rforward();
     delay(1000);
@@ -76,6 +85,10 @@ void loop(){
     lstop();
     rstop();
     delay(1000);
+    
+    lback();
+    rforward();
+    delay(500);
   }
 }
 
@@ -139,6 +152,8 @@ int howFar(){
   duration = pulseIn(echopin, HIGH);
   
   cm = duration / 58.2;
+  
+  Serial.println(cm);
   
   return cm;
 }
