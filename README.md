@@ -1,3 +1,5 @@
+int rat = 0;
+
 void setup() {
   pinMode(12, OUTPUT);
   pinMode(9, OUTPUT);
@@ -7,7 +9,7 @@ void setup() {
 
   pinMode(7, OUTPUT);
   pinMode(6, OUTPUT);
-  
+
   delay(1000);
   digitalWrite(7, HIGH);
   digitalWrite(6, HIGH);
@@ -20,16 +22,14 @@ void setup() {
   delay(1000);
   digitalWrite(7, LOW);
   digitalWrite(6, LOW);
-  delay(1000);  
+  delay(1000);
 }
 
 void loop(){
   int ctr = 0;
   int far = 0;
   far = howFar();
-  
-  Serial.println(far);
-  
+    
   if (far < 2){
     digitalWrite(6, HIGH);
     digitalWrite(7, HIGH);
@@ -84,12 +84,21 @@ void loop(){
     
     lstop();
     rstop();
-    delay(1000);
-    
+        
+    if (rat == 0){
     lback();
     rforward();
     delay(500);
-  }
+    rat = 1;
+   }
+   
+   if (rat == 1){
+     rback();
+     rforward();
+     delay(500);
+     rat = 0;
+   }
+}
 }
 
 void lback(){
@@ -135,7 +144,7 @@ void rstop(){
 int howFar(){
   int trigpin = 5;
   int echopin = 4;
-  
+    
   pinMode(trigpin, OUTPUT);
   pinMode(echopin, INPUT);
   
@@ -152,8 +161,6 @@ int howFar(){
   duration = pulseIn(echopin, HIGH);
   
   cm = duration / 58.2;
-  
-  Serial.println(cm);
-  
+    
   return cm;
 }
