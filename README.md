@@ -1,5 +1,6 @@
 void setup() {
   Serial.begin(9600);
+  pinMode(10, OUTPUT);
   
   pinMode(12, OUTPUT);
   pinMode(9, OUTPUT);
@@ -7,7 +8,7 @@ void setup() {
   pinMode(13, OUTPUT);
   pinMode(8, OUTPUT);
 
-  delay(5000);
+  delay(10000);
   
   lforward();
   rforward();
@@ -15,8 +16,9 @@ void setup() {
 int ctr = 0;
 void loop(){
   int far = 0;
+    
   far = howFar();
-  
+    
   if (far == 0){
     ctr++;
     Serial.println(ctr);
@@ -25,19 +27,29 @@ void loop(){
     Serial.println(far);
   }
   
-  if (far > 10){
+  if (far > 5){
     lforward();
     rforward();
+    
+    digitalWrite(10, HIGH);
   }
   
-  if (far <= 10){
+  if (far <= 5){
+    digitalWrite(10, LOW);
+    
     lstop();
     rstop();
         
-    delay(2000);
+    delay(1000);
     
     lback();
-    rforward();
+    rback();
+    
+    
+    //turn both ways
+    int far1;
+    int far2;
+    //howFar(), then check which is farther.
 }
 }
 
