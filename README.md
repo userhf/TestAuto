@@ -44,7 +44,29 @@ void loop(){
     
     lback();
     rback();
+
+    delay(1000);
+
+    lback();
+    rfoward();
+
+    delay(800);
+
+    lstop();
+    rstop();
     
+    int far1 = howFar();
+
+    lforward();
+    rback();
+
+    delay(800);
+
+    lstop();
+    rstop();
+
+    int far2 = howFar();
+
     
     //turn both ways
     int far1;
