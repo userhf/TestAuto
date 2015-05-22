@@ -67,6 +67,10 @@ void loop(){
 
     int far2 = howFar();
     
+    Serial.print(far1);
+    Serial.print(" vs. ");
+    Serial.println(far2);
+    
     if (far1 > far2){
       lback();
       rforward();
