@@ -46,44 +46,33 @@ void loop(){
     rback();
 
     delay(1000);
-
-    lback();
-    rfoward();
-
-    delay(800);
-
+    
     lstop();
     rstop();
     
-    int far1 = howFar();
-
-    lforward();
-    rback();
-
-    delay(1600);
-
-    lstop();
-    rstop();
-
-    int far2 = howFar();
+    int ctr = 0;
+    int record = 0;
+    int otherrecord = 0;
     
-    Serial.print(far1);
-    Serial.print(" vs. ");
-    Serial.println(far2);
-    
-    if (far1 > far2){
-      lback();
-      rforward();
+    while (ctr <= 34){
+      int far = look();
       
-      delay(1600);
+      if (far > record){
+        record = far;
+        otherrecord = ctr;
+      }
+      
+      ctr = ctr +  1;
     }
     
-    if (far1 <= far2){
-      delay(1600);
-    }
+    lback();
+    rforward();
+    
+    delay(ctr*200);
     
     lforward();
     rforward();
+    
 }
 }
 
@@ -117,6 +106,21 @@ void lstop(){
 
 void rstop(){
   digitalWrite(8, HIGH);
+}
+
+int look(){
+  lstop();
+  rstop();
+  
+  int far;
+  
+  lforward();
+  rback();
+  
+  delay(200);
+  
+  far = howFar();  
+  return far;
 }
 
 int howFar(){
