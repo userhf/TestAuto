@@ -60,18 +60,26 @@ void loop(){
     lforward();
     rback();
 
-    delay(800);
+    delay(1600);
 
     lstop();
     rstop();
 
     int far2 = howFar();
-
     
-    //turn both ways
-    int far1;
-    int far2;
-    //howFar(), then check which is farther.
+    if (far1 > far2){
+      lback();
+      rforward();
+      
+      delay(1600);
+    }
+    
+    if (far1 <= far2){
+      delay(1600);
+    }
+    
+    lforward();
+    rforward();
 }
 }
 
