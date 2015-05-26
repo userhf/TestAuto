@@ -54,15 +54,21 @@ void loop(){
     int record = 0;
     int otherrecord = 0;
     
-    while (ctr <= 34){
+    while (ctr <= 16){
       int far = look();
       
-      if (far > record){
+      Serial.print(far);
+      
+      Serial.print("                         ");
+      
+      if (far >= record){
         record = far;
         otherrecord = ctr;
       }
       
-      ctr = ctr +  1;
+      Serial.println(otherrecord);
+      
+      ctr++;
     }
     
     lback();
@@ -112,14 +118,21 @@ int look(){
   lstop();
   rstop();
   
+  delay(500);
+  
   int far;
   
   lforward();
   rback();
   
+  digitalWrite(10, HIGH);
+  
   delay(200);
   
-  far = howFar();  
+  far = howFar();
+  
+  digitalWrite(10, LOW);
+  
   return far;
 }
 
