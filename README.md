@@ -74,7 +74,7 @@ void loop(){
     lback();
     rforward();
     
-    delay(ctr*200);
+    delay(otherrecord*200);
     
     lforward();
     rforward();
