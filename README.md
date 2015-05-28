@@ -132,6 +132,14 @@ int look(){
   far = howFar();
   
   digitalWrite(10, LOW);
+
+  if(far == 0){
+    far = 300;
+  }
+
+  if(far > 300){
+    far = 300;
+  }
   
   return far;
 }
@@ -156,6 +164,14 @@ int howFar(){
   duration = pulseIn(echopin, HIGH);
   
   cm = duration / 58.2;
-    
+  
+  if(far == 0){
+    far = 300;
+  }
+
+  if(far > 300){
+    far = 300;
+  }
+  
   return cm;
 }
