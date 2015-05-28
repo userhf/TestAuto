@@ -1,14 +1,26 @@
 void setup() {
   Serial.begin(9600);
   pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
   
   pinMode(12, OUTPUT);
   pinMode(9, OUTPUT);
 
   pinMode(13, OUTPUT);
   pinMode(8, OUTPUT);
-
-  delay(10000);
+  
+  int ctr = 0;
+  while (ctr < 10){
+    if(ctr%2 == 1){
+      digitalWrite(10, HIGH);
+    }
+    if(ctr%2 == 0){
+      digitalWrite(10, LOW);
+    }
+    ctr++;
+    delay(1000);
+  }
+  digitalWrite(10, HIGH);
   
   lforward();
   rforward();
@@ -16,12 +28,21 @@ void setup() {
 int ctr = 0;
 void loop(){
   int far = 0;
+  int last = 0;
     
   far = howFar();
-    
+  
+  if (last != 0){
+    if ((last-far) > 5){
+      far = last;
+    }
+  }
+  
   if (far == 0){
     ctr++;
     Serial.println(ctr);
+    
+    last = 0;
   }
   else{
     Serial.println(far);
@@ -32,6 +53,8 @@ void loop(){
     rforward();
     
     digitalWrite(10, HIGH);
+    
+    last = far;
   }
   
   if (far <= 5){
@@ -69,6 +92,8 @@ void loop(){
       Serial.println(otherrecord);
       
       ctr++;
+      
+      last = 0;
     }
     
     lback();
@@ -78,7 +103,6 @@ void loop(){
     
     lforward();
     rforward();
-    
 }
 }
 
@@ -165,12 +189,12 @@ int howFar(){
   
   cm = duration / 58.2;
   
-  if(far == 0){
-    far = 300;
+  if(cm == 0){
+    cm = 300;
   }
 
-  if(far > 300){
-    far = 300;
+  if(cm > 300){
+    cm = 300;
   }
   
   return cm;
