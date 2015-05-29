@@ -146,6 +146,7 @@ void countdown(){
   for(int note = 0; note < 10; note++){
     tone(11, notes[note], (1000/ durations[note]);
   }
+  notone(11);
 }
 
 int look(){
