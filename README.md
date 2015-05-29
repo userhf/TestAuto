@@ -8,9 +8,11 @@ void setup() {
 
   pinMode(13, OUTPUT);
   pinMode(8, OUTPUT);
+
+  countdown();
   
   int ctr = 0;
-  while (ctr < 10){
+  while (ctr < 6){
     if(ctr%2 == 1){
       digitalWrite(10, HIGH);
     }
@@ -136,6 +138,14 @@ void lstop(){
 
 void rstop(){
   digitalWrite(8, HIGH);
+}
+
+void countdown(){
+  int notes[] = {659, 587, 659, 440, 698, 659, 698, 659, 587};
+  int durations[] = {8, 8, 4, 1, 8, 8, 4, 4, 2};
+  for(int note = 0; note < 10; note++){
+    tone(11, notes[note], (1000/ durations[note]);
+  }
 }
 
 int look(){
