@@ -1,7 +1,6 @@
 void setup() {
   Serial.begin(9600);
   pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
   
   pinMode(12, OUTPUT);
   pinMode(9, OUTPUT);
@@ -145,15 +144,18 @@ int look(){
   delay(500);
   
   int far;
-  
+  int far2;
+  int far3;
   lforward();
   rback();
   
   digitalWrite(10, HIGH);
   
   delay(200);
-  
+    
   far = howFar();
+  far2 = howFar();
+  far3 = howFar();
   
   digitalWrite(10, LOW);
 
@@ -164,6 +166,22 @@ int look(){
   if(far > 300){
     far = 300;
   }
+  if(far2 == 0){
+    far2 = 300;
+  }
+
+  if(far2 > 300){
+    far2 = 300;
+  }
+  if(far3 == 0){
+    far3 = 300;
+  }
+
+  if(far3 > 300){
+    far3 = 300;
+  }
+  
+  far = ((far + far2 + far3) / 3);
   
   return far;
 }
